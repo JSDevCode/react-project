@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Docs from "./pages/Docs.jsx";
-import Header from "./components/Header.jsx";
+import Docs from "./pages/Docs/Docs.jsx";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import "./App.css";
 
 function App() {
