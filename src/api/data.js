@@ -20,3 +20,29 @@ export async function getOne(id) {
         console.error("Failed to fetch document:", err)
   }
 }
+
+export async function addOne(body) {
+    try {
+        const res = await fetch(`${path}/`, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return res.json();
+    } catch (err) {
+        console.error("Failed to add document:", err)
+    }
+}
+
+export async function deleteOne(id) {
+    try {
+        const res = await fetch(`${path}/delete/${id}`, {
+            method: "DELETE",
+        });
+        return res.json();
+    } catch (err) {
+        console.error("Failed to delete document:", err)
+    }
+}
