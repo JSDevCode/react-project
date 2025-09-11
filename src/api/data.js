@@ -10,3 +10,18 @@ export async function getAllData() {
         console.error("Failed to fetch documents:", err)
     }
 }
+
+export async function addOne(body) {
+    try {
+        const res = await fetch(`${path}/`, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return res.json();
+    } catch (err) {
+        console.error("Failed to add document:", err)
+    }
+}
