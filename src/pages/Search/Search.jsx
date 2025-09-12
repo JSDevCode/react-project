@@ -1,8 +1,8 @@
 import { useState } from "react";
 import GetOneDoc from "../GetOneDoc/GetOneDoc.jsx";
-import "./SearchPage.css";
+import "./Search.css";
 
-function SearchPage() {
+function Search() {
   const [docId, setDocId] = useState(""); // Värdet i inputfältet
   const [selectedId, setSelectedId] = useState(""); // ID som ska skickas till GetOneDoc
 
@@ -26,4 +26,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default Search;

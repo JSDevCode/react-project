@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Docs from "./pages/Docs/Docs.jsx";
-import SearchPage from "./pages/SearchPage/SearchPage.jsx";
+import Search from "./pages/Search/Search.jsx";
+import Update from "./pages/Update/Update.jsx";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import "./App.css";
@@ -13,7 +14,8 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Docs />} />
-            <Route path="/search" element={<SearchPage />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/update/:id" element={<Update />} />
           </Routes>
         </main>
       </Router>
