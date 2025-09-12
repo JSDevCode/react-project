@@ -39,8 +39,8 @@ function Docs() {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
+            <tr key={item._id}>
+              <td>{item._id}</td>
               <td>{item.title}</td>
               <td>{item.content}</td>
               <td>
