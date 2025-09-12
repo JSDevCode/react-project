@@ -15,7 +15,7 @@ function Docs() {
 
   const handleDelete = async (id) => {
     deleteOne(id);
-    setData(data.filter((item) => item.id !== id));
+    setData(data.filter((item) => item._id !== id));
   };
 
   const handleUpdate = (id) => {
@@ -46,14 +46,14 @@ function Docs() {
               <td>
                 <button
                   className="delete-btn"
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(item._id)}
                 >
                   Delete
                 </button>
 
                 <button
                   className="update-btn"
-                  onClick={() => handleUpdate(item.id)}
+                  onClick={() => handleUpdate(item._id)}
                 >
                   Update
                 </button>
