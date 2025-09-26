@@ -25,8 +25,10 @@ function Docs() {
   return (
     <div>
       <div className="head">
-        <h2>Documents</h2>
-        <button onClick={() => navigate("/add")}>Add new</button>
+        <h1>Documents</h1>
+        <button id="add-btn" onClick={() => navigate("/add")}>
+          Add new
+        </button>
       </div>
       <table>
         <thead>
