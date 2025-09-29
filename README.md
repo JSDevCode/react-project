@@ -50,11 +50,6 @@ Each component may have its own folder with a `.jsx` file and an optional `.css`
 npm install cypress --save-dev
 ```
 
-- Add the following folders to your `.gitignore`:
-  - cypress/downloads/
-  - cypress/screenshots/
-  - cypress/videos/
-
 ### Running tests
 
 1. Open a terminal in your project directory.
