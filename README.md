@@ -1,6 +1,13 @@
 # React frontend
 
+## Relevant information
 This is the frontend repository for course DV1677 JSRamverk at BTH
+
+Link to backend repository: https://github.com/Hampe024/ssr-editor
+
+Link to frontend deployment using Github Pages: https://sams-2024.github.io/react-project/
+
+Link to backend deployment using Azure: https://jsramverk-hagt21-fdbhdnf5hrgrcbcc.northeurope-01.azurewebsites.net/
 
 ## Setup Instructions
 
