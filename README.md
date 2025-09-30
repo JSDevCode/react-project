@@ -1,12 +1,82 @@
-# React + Vite
+# React frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Relevant information
+This is the frontend repository for course DV1677 JSRamverk at BTH
 
-Currently, two official plugins are available:
+Link to backend repository: https://github.com/Hampe024/ssr-editor
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Link to frontend deployment using Github Pages: https://sams-2024.github.io/react-project/
 
-## Expanding the ESLint configuration
+Link to backend deployment using Azure: https://jsramverk-hagt21-fdbhdnf5hrgrcbcc.northeurope-01.azurewebsites.net/
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup Instructions
+
+1. Clone the repository
+
+```
+git clone git@github.com:SamS-2024/react-project.git
+```
+
+2. Install all dependencies
+
+```
+npm install
+```
+
+3. Create a `.env` file and add the following:
+
+```
+VITE_PORT=3000
+```
+
+4. Start the application
+
+```
+npm run dev
+```
+
+## Project overview
+
+This frontend project was created with Vite and uses React.
+
+The `src` folder contains:
+
+- `api`- handles communication with the backend.
+- `components`- reusable components like Header and Footer.
+- `pages`- components that act as views.
+
+Each component may have its own folder with a `.jsx` file and an optional `.css` file.
+
+## Testing with Cypress
+
+### Installation and setup
+
+- Install Cypress as a development dependency:
+
+```
+npm install cypress --save-dev
+```
+
+### Running tests
+
+1. Open a terminal in your project directory.
+
+2. Start Cypress:
+
+```
+npx Cypress open
+```
+
+3. In the Cypress UI:
+
+   - Select E2E Testing
+   - Choose a browser, for example 'Chrome'
+   - Click Start E2E Testing
+
+4. Navigate to a directory or file to view and run the tests.
+
+### Creating new tests
+
+- Create test files inside the cypress/e2e folder.
+
+- Repeat the steps above to run your new tests.
