@@ -1,0 +1,17 @@
+.run-btn {
+  background-color: #7b019d;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.run-btn:hover {
+  background-color: #5e017a;
+}

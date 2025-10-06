@@ -9,20 +9,17 @@ function ViewDoc() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [type, setType] = useState("");
 
   useEffect(() => {
     getOne(id)
       .then((result) => {
         setTitle(result.doc.title);
         setContent(result.doc.content);
+        setType(result.doc.type);
       })
       .catch((err) => console.error(err));
   }, [id]);
-
-  const handleSave = async () => {
-    await updateOne({ id, title, content });
-    navigate("/"); // Tillbaka till listan
-  };
 
   const handleDelete = async (id) => {
     deleteOne(id);
@@ -32,6 +29,10 @@ function ViewDoc() {
   const handleUpdate = (id) => {
     navigate(`/update/${id}`);
   };
+
+  const handleCode = (id) => {
+    navigate(`/code/${id}`);
+  }
 
   return (
     <div className="update-container">
@@ -46,6 +47,15 @@ function ViewDoc() {
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
       />
+
+      {type === "code" && (
+        <button
+          className="code-btn"
+          onClick={() => handleCode(id)}
+        >
+          Code
+        </button>
+      )}
 
       <button
         className="update-btn"

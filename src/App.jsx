@@ -4,6 +4,7 @@ import ViewDoc from "./pages/ViewDoc/ViewDoc.jsx";
 import AddDoc from "./pages/Add/Add.jsx";
 import Search from "./pages/Search/Search.jsx";
 import Update from "./pages/Update/Update.jsx";
+import CodeEditor from "./pages/CodeEditor/CodeEditor.jsx";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
             <Route path="/add" element={<AddDoc />} />
             <Route path="/search" element={<Search />} />
             <Route path="/update/:id" element={<Update />} />
+            <Route path="/code/:id" element={<CodeEditor />} />
           </Routes>
         </main>
       </Router>
