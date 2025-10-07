@@ -35,7 +35,7 @@ function Update({ socket }) {
     });
 
     return () => {
-      // Tar bort listener när en komponent 'unmount'.
+      // Tar bort listener när en komponent 'unmounts'.
       socket.current.off("doc");
     };
   }, [id]);

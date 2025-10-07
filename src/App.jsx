@@ -15,7 +15,7 @@ const port = import.meta.env.VITE_PORT;
 const SERVER_URL = "http://localhost:" + port;
 
 function App() {
-  // Skapar en referens för socket objektet.
+  // Skapar en referens till socket-anslutningen
   const socket = useRef(null);
 
   useEffect(() => {

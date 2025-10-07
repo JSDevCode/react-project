@@ -37,7 +37,7 @@ function CodeEditor({ socket }) {
     });
 
     return () => {
-      // Tar bort listener när en komponent 'unmount'.
+      // Tar bort listener när en komponent 'unmounts'.
       socket.current.off("doc");
     };
   }, [id]);
@@ -58,7 +58,7 @@ function CodeEditor({ socket }) {
   };
 
   const handleSave = async () => {
-    navigate("/"); // Tillbaka till listan
+    navigate("/");
   };
 
   if (loading) {
@@ -88,10 +88,10 @@ function CodeEditor({ socket }) {
         height="60vh"
         defaultLanguage="javascript"
         theme="vs-dark"
-        // För att kunna uppdatera samtidigt.
+        // För att uppdatera innehåll i realtid.
         value={content}
         onChange={(value) => {
-          // Skickar bara till socket om något ändrats.
+          // Skickar endast till socket om något ändrats.
           if (value !== content) {
             setContent(value);
             socket.current.emit("doc", { _id: id, title, content: value });
