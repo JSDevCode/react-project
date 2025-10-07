@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getOne, updateOne } from "../../api/data";
+import { getOne, deleteOne } from "../../api/data";
 import "./ViewDoc.css";
 
 function ViewDoc() {
@@ -23,7 +23,7 @@ function ViewDoc() {
 
   const handleDelete = async (id) => {
     deleteOne(id);
-    setData(data.filter((item) => item._id !== id));
+    navigate("/"); // Tillbaka till listan
   };
 
   const handleUpdate = (id) => {
