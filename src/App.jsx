@@ -14,8 +14,6 @@ import "./App.css";
 const port = import.meta.env.VITE_PORT;
 const SERVER_URL = "http://localhost:" + port;
 
-let socket;
-
 function App() {
   // Skapar en referens för socket objektet.
   const socket = useRef(null);
@@ -48,4 +46,3 @@ function App() {
 }
 
 export default App;
-// export { socket };

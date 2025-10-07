@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import { getOne, updateOne } from "../../api/data";
 import { getOne } from "../../api/data";
 import Editor from "@monaco-editor/react";
 import "./CodeEditor.css";
 import { execJs } from "../../api/execjs";
-// import { socket } from "../../App.jsx";
 
 function CodeEditor({ socket }) {
   const { id } = useParams(); // Hämtar id från URL.
@@ -34,7 +32,7 @@ function CodeEditor({ socket }) {
     socket.current.emit("create", id);
     // Skapar en eventlyssnare för "doc"
     socket.current.on("doc", (data) => {
-      setContent(data.html);
+      setContent(data.content);
       setTitle(data.title);
     });
 
@@ -60,7 +58,6 @@ function CodeEditor({ socket }) {
   };
 
   const handleSave = async () => {
-    // await updateOne({ id, title, content });
     navigate("/"); // Tillbaka till listan
   };
 
@@ -91,13 +88,14 @@ function CodeEditor({ socket }) {
         height="60vh"
         defaultLanguage="javascript"
         theme="vs-dark"
-        // defaultValue={content}
         // För att kunna uppdatera samtidigt.
         value={content}
         onChange={(value) => {
-          setContent(value);
-          // Sockets
-          socket.current.emit("doc", { _id: id, title, html: value });
+          // Skickar bara till socket om något ändrats.
+          if (value !== content) {
+            setContent(value);
+            socket.current.emit("doc", { _id: id, title, content: value });
+          }
         }}
         options={{
           padding: { top: 16 },

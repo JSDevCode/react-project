@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import { getOne, updateOne } from "../../api/data";
 import { getOne } from "../../api/data";
 
 import "./Update.css";
-// import { socket } from "../../App.jsx";
 
 function Update({ socket }) {
   const { id } = useParams(); // Hämtar id från URL.
@@ -13,6 +11,7 @@ function Update({ socket }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  // Hämtar initialt dokument
   useEffect(() => {
     getOne(id)
       .then((result) => {
@@ -25,12 +24,14 @@ function Update({ socket }) {
   // Sockets
   useEffect(() => {
     if (!id || !socket.current) return;
+
     // Joina rum.
     socket.current.emit("create", id);
+
     // Skapar en eventlyssnare för "doc"
     socket.current.on("doc", (data) => {
-      setContent(data.html);
       setTitle(data.title);
+      setContent(data.content);
     });
 
     return () => {
@@ -40,8 +41,6 @@ function Update({ socket }) {
   }, [id]);
 
   const handleSave = async () => {
-    // await updateOne({ id, title, content });
-
     navigate("/"); // Tillbaka till listan
   };
 
@@ -55,7 +54,7 @@ function Update({ socket }) {
           socket.current.emit("doc", {
             _id: id,
             title: e.target.value,
-            html: content,
+            content,
           });
         }}
         placeholder="Title"
@@ -66,8 +65,8 @@ function Update({ socket }) {
           setContent(e.target.value);
           socket.current.emit("doc", {
             _id: id,
-            title: title,
-            html: e.target.value,
+            title,
+            content: e.target.value,
           });
         }}
         placeholder="Content"
