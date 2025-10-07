@@ -13,6 +13,7 @@ function CodeEditor() {
     const [content, setContent] = useState("");
     const [output, setOutput] = useState("");
     const [loading, setLoading] = useState(true);
+    const [running, setRunning] = useState(false);
 
     useEffect(() => {
         getOne(id)
@@ -25,8 +26,18 @@ function CodeEditor() {
     }, [id]);
 
     const handleRun = async (id) => {
-        const res = await execJs(content);
-        setOutput(res);
+        setRunning(true);
+        setOutput("");
+
+        try {
+            const res = await execJs(content);
+            setOutput(res);
+        } catch (err) {
+            setOutput("Error running code.");
+            console.error(err);
+        } finally {
+            setRunning(false);
+        }
     };
 
     const handleSave = async () => {
@@ -49,8 +60,9 @@ function CodeEditor() {
             <button
                 className="run-btn-code"
                 onClick={() => handleRun(id)}
+                disabled={running}
             >
-                Run code
+                {running ? "Running..." : "Run code"}
             </button>
 
             <button
@@ -67,7 +79,14 @@ function CodeEditor() {
                 onChange={(value) => setContent(value)}
             />
             <h3>Output:</h3>
-            <pre className="output-box">{output}</pre>
+            {running ? (
+                <div className="output-loading">
+                <div className="spinner"></div>
+                <p>Running code...</p>
+                </div>
+            ) : (
+                <pre className="output-box">{output}</pre>
+            )}
         </>
     );
 }
