@@ -57,7 +57,7 @@ function CodeEditor({ socket }) {
     }
   };
 
-  const handleSave = async () => {
+  const redirectToDocs = async () => {
     navigate("/");
   };
 
@@ -81,8 +81,8 @@ function CodeEditor({ socket }) {
         {running ? "Running..." : "Run code"}
       </button>
 
-      <button className="update-btn-code" onClick={() => handleSave(id)}>
-        Save and exit
+      <button className="update-btn-code" onClick={redirectToDocs}>
+        Docs
       </button>
       <Editor
         height="60vh"

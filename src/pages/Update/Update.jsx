@@ -40,7 +40,7 @@ function Update({ socket }) {
     };
   }, [id]);
 
-  const handleSave = async () => {
+  const redirectToDocs = async () => {
     navigate("/"); // Tillbaka till listan
   };
 
@@ -71,8 +71,8 @@ function Update({ socket }) {
         }}
         placeholder="Content"
       />
-      <button className="update-btn" onClick={handleSave}>
-        Save
+      <button className="update-btn" onClick={redirectToDocs}>
+        Docs
       </button>
     </div>
   );
