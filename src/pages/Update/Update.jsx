@@ -66,7 +66,7 @@ function Update() {
         }}
         placeholder="Content"
       />
-      <button onClick={handleSave}>Save</button>
+      <button className="update-btn" onClick={handleSave}>Save</button>
     </div>
   );
 }
