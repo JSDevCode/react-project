@@ -16,7 +16,7 @@ function Register() {
     if (result.data) {
       navigate("/");
     } else {
-      alert("Something went wrong, please try again");
+      alert("User already exists, please enter another email adress.");
     }
   };
 

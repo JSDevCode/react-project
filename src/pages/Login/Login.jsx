@@ -16,9 +16,9 @@ function Login() {
     if (result.data && result.data.token) {
       localStorage.setItem("token", result.data.token);
 
-      navigate("/docs");
+      navigate("/");
     } else {
-      alert("Wrong email or password"); ////// funkar inte!!!!!
+      alert("Wrong email or password");
     }
   };
 

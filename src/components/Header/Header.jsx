@@ -5,8 +5,7 @@ function Header() {
   return (
     <header>
       <nav>
-        <Link to="/">Login</Link>
-        <Link to="/docs">Documents</Link>
+        <Link to="/">Home</Link>
         <Link to="/add">Add Document</Link>
         <Link to="/search">Search</Link>
       </nav>

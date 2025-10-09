@@ -8,47 +8,75 @@ function Docs() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
     getAllData()
-      .then((result) => setData(result.docs))
+      .then((result) => {
+        if (result && result.docs) {
+          setData(result.docs);
+        }
+      })
       .catch((err) => console.error(err));
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <div>
-      <h1>Documents</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data.map((item) => (
-              <tr
-                key={item._id}
-                onClick={() => navigate(`/view/${item._id}`)}
-                style={{ cursor: "pointer" }}
-              >
-                <td>{item._id}</td>
-                <td>{item.title}</td>
-                <td>{item.content}</td>
-                <td>{item.type || "text"}</td>
+    <>
+      {data.length > 0 ? (
+        <div>
+          <h1>Documents</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Type</th>
               </tr>
-            ))}
-        </tbody>
-      </table>
-      <button
-        id="add-btn"
-        className="add-new-btn"
-        onClick={() => navigate("/add")}
-      >
-        Add new
-      </button>
-    </div>
+            </thead>
+            <tbody>
+              {data &&
+                data.map((item) => (
+                  <tr
+                    key={item._id}
+                    onClick={() => navigate(`/view/${item._id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>{item._id}</td>
+                    <td>{item.title}</td>
+                    <td>{item.content}</td>
+                    <td>{item.type || "text"}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <button
+            id="add-btn"
+            className="add-new-btn"
+            onClick={() => navigate("/add")}
+          >
+            Add new
+          </button>
+          <button className="add-new-btn" onClick={logout}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h3>
+            Welcome to the SSR editor. Please log in or register to create
+            documents and view your saved ones.
+          </h3>
+          <button className="add-new-btn" onClick={() => navigate("/login")}>
+            Login
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 
