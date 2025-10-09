@@ -6,7 +6,7 @@ export async function getAllData() {
     try {
         // Token hämtas från localStorage
         const token = localStorage.getItem("token");
-        const res = await fetch(`${path}/docs`, {
+        const res = await fetch(`${path}/`, {
             headers: {
                 "Content-Type": "application/json",
                 "x-access-token": token
@@ -25,7 +25,7 @@ export async function getOne(id) {
         const res = await fetch(`${path}/${id}`, {
             headers: {
                 "Content-type": "application/json",
-                "x--token": token
+                "x-access-token": token
             }
         });
         return res.json();

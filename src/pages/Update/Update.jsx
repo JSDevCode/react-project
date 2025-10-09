@@ -42,8 +42,13 @@ function Update({ socket }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const redirectToDocs = async () => {
-    navigate("/docs"); // Tillbaka till listan
+  // const redirectToDocs = async () => {
+  //   navigate("/docs"); // Tillbaka till listan
+  // };
+
+  const redirectToDocs = () => {
+    // Använder timeout för visning pga fördröjning i backend timeouten i sparandet.
+    setTimeout(() => navigate("/docs"), 100);
   };
 
   return (

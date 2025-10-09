@@ -1,34 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/data";
+import { register } from "../../api/data";
 
-import "./Login.css";
+import "../Login/Login.css";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    const result = await login({ email, password });
-    if (result.data && result.data.token) {
-      localStorage.setItem("token", result.data.token);
-
-      navigate("/docs");
+    const result = await register({ email, password });
+    if (result.data) {
+      navigate("/");
     } else {
-      alert("Wrong email or password"); ////// funkar inte!!!!!
+      alert("Something went wrong, please try again");
     }
-  };
-
-  const toRegister = () => {
-    navigate("/register");
   };
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Register</h2>
       <input
         value={email}
         onChange={(e) => {
@@ -44,14 +38,11 @@ function Login() {
         }}
         placeholder="Password"
       />
-      <button className="login-btn" onClick={handleLogin}>
-        Login
-      </button>
-      <button className="to-register-btn" onClick={toRegister}>
+      <button className="login-btn" onClick={handleRegister}>
         Register
       </button>
     </div>
   );
 }
 
-export default Login;
+export default Register;
