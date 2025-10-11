@@ -52,3 +52,7 @@
 .to-register-btn:hover {
   background: #5a6268;
 }
+
+.error-message {
+  color: #ff0000;
+}

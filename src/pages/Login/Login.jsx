@@ -9,6 +9,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ function Login() {
 
       navigate("/");
     } else {
-      alert("Wrong email or password");
+      setMessage("Wrong email or password");
     }
   };
 
@@ -50,6 +51,7 @@ function Login() {
       <button className="to-register-btn" onClick={toRegister}>
         To register
       </button>
+      {message && <p className="error-message">{message}</p>}
     </div>
   );
 }

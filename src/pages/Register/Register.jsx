@@ -9,6 +9,7 @@ function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ function Register() {
     if (result.data) {
       navigate("/login");
     } else {
-      alert("User already exists, please enter another email adress.");
+      setMessage("User already exists, please enter another email adress.");
     }
   };
 
@@ -41,6 +42,7 @@ function Register() {
       <button className="register-btn" onClick={handleRegister}>
         Register
       </button>
+      {message && <p className="error-message">{message}</p>}
     </div>
   );
 }
