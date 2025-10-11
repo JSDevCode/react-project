@@ -14,10 +14,13 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     const result = await register({ email, password });
+
     if (result.data) {
       navigate("/login");
+    } else if (result.errors) {
+      setMessage(result.errors.detail || "Registration failed");
     } else {
-      setMessage("User already exists, please enter another email adress.");
+      setMessage("Unknown error occured");
     }
   };
 
