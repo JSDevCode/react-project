@@ -33,7 +33,7 @@ export async function getAllData() {
 export async function getOne(id) {
     try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${path}/${id}`, {
+        const res = await fetch(`${path}/docs/${id}`, {
             headers: {
                 "x-access-token": token
             }
@@ -143,10 +143,28 @@ export async function register(body) {
     }
 }
 
+/* Användare i samlingen 'docs' som kopplas till ett specifikt 'doc' */
 export async function getUsersList(docId) {
     try {
         const token = localStorage.getItem("token");
         const res = await fetch(`${path}/users/${docId}`, {
+            method: "GET",
+            headers: {
+                "x-access-token": token
+            },
+        });
+
+        return res.json();
+    } catch (err) {
+        console.error("Fetching users failed:", err)
+    }
+}
+
+/* Alla registrerade användare i databasen i 'users' samlingen */
+export async function getAllUsers() {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${path}/users`, {
             method: "GET",
             headers: {
                 "x-access-token": token

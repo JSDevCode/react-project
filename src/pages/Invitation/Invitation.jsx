@@ -53,7 +53,7 @@ function Invitation() {
         <ul>
           {/* Visar ägare */}
           <li key="users-header" className="users">
-            Owner:
+            Document owner:
           </li>
           <li key="owner">{usersList.owner}</li>
 
@@ -62,7 +62,7 @@ function Invitation() {
             usersList.allowedUsers.length > 0 && (
               <>
                 <li key="users-header" className="users">
-                  Users:
+                  Collaborators:
                 </li>
                 {usersList.allowedUsers.map((user) => {
                   return <li key={user}>{user}</li>;

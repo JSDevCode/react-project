@@ -18,6 +18,15 @@
   font-size: 0.95rem;
 }
 
+.invitation-container input {
+  width: 250px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
 .invite-message {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
@@ -36,13 +45,4 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-}
-
-.invitation-container input {
-  width: 250px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 8px;
-  font-size: 0.9rem;
 }

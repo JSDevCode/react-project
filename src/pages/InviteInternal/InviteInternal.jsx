@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { inviteInternal, getUsersList } from "../../api/data.js";
-import "../Invitation/Invitation.css";
+import AllUsers from "../AllUsers/AllUsers.jsx";
+import "./InviteInternal.css";
 
 function InviteInternal() {
   const { id: docId } = useParams();
@@ -29,42 +30,44 @@ function InviteInternal() {
   };
 
   return (
-    <div className="invitation-container">
-      <h1>Invite internal user to document</h1>
-      <input
-        value={userEmail}
-        onChange={(e) => setUserEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <button
-        onClick={async () => {
-          await handleInvite();
-          setUserEmail("");
-        }}
-      >
-        Invite
-      </button>
-      {message && <p className="invite-message">{message}</p>}
+    <div className="invitation-container-second">
+      <div className="invite-left">
+        <h1>Invite internal user to document</h1>
+        <input
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+          placeholder="Email"
+        />
+        <button
+          onClick={async () => {
+            await handleInvite();
+            setUserEmail("");
+          }}
+        >
+          Invite
+        </button>
+        {message && <p className="invite-message">{message}</p>}
+        <div className="users-list-second">
+          <ul>
+            <li className="users">Document owner:</li>
+            <li>{usersList.owner}</li>
 
-      <div className="users-list">
-        <ul>
-          <li className="users">Owner:</li>
-          <li>{usersList.owner}</li>
+            {usersList.allowedUsers.length > 0 && (
+              <>
+                <li className="users">Collaborators:</li>
+                {usersList.allowedUsers.map((user) => (
+                  <li key={user}>{user}</li>
+                ))}
+              </>
+            )}
 
-          {usersList.allowedUsers.length > 0 && (
-            <>
-              <li className="users">Users:</li>
-              {usersList.allowedUsers.map((user) => (
-                <li key={user}>{user}</li>
-              ))}
-            </>
-          )}
-
-          {usersList.allowedUsers.length === 0 && (
-            <li className="invite-message">No collaborators yet.</li>
-          )}
-        </ul>
+            {usersList.allowedUsers.length === 0 && (
+              <li className="invite-message">No collaborators yet.</li>
+            )}
+          </ul>
+        </div>
       </div>
+      <AllUsers /> {/* visar alla registrerade användare */}
     </div>
   );
 }
