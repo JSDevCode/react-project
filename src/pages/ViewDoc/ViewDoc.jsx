@@ -34,6 +34,14 @@ function ViewDoc() {
     navigate(`/code/${id}`);
   };
 
+  const handleInvitation = (id) => {
+    navigate(`/invite/${id}`);
+  };
+
+  const handleInternalInvitation = (id) => {
+    navigate(`/invite-internal/${id}`);
+  };
+
   return (
     <div className="update-container">
       <h2>Document {id}</h2>
@@ -56,6 +64,17 @@ function ViewDoc() {
 
       <button className="update-btn" onClick={() => handleUpdate(id)}>
         Update
+      </button>
+
+      <button
+        className="invite-btn"
+        onClick={() => handleInternalInvitation(id)}
+      >
+        Invite members
+      </button>
+
+      <button className="invite-btn" onClick={() => handleInvitation(id)}>
+        Invite others
       </button>
 
       <button className="delete-btn" onClick={() => handleDelete(id)}>

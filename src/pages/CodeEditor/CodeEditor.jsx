@@ -62,7 +62,7 @@ function CodeEditor({ socket }) {
     }
   };
 
-  const redirectToDocs = async () => {
+  const redirectToDocs = () => {
     navigate("/");
   };
 
