@@ -11,9 +11,7 @@ function Update({ socket }) {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(true);
-  const [running, setRunning] = useState(false);
   const [comments, setComments] = useState([]);
   const [editorReady, setEditorReady] = useState(false);
 
