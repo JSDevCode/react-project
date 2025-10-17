@@ -22,7 +22,8 @@ function ViewDoc() {
   }, [id]);
 
   const handleDelete = async (id) => {
-    deleteOne(id);
+    // Väntar på att deleteOne är klar.
+    await deleteOne(id);
     navigate("/"); // Tillbaka till listan
   };
 
