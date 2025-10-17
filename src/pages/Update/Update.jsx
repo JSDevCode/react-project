@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
@@ -29,7 +30,7 @@ function Update({ socket }) {
         const lineNumber = e.target.position.lineNumber;
         const text = prompt(`Comment for line ${lineNumber}:`);
         if (text) {
-          console.log(text)
+          console.log(text);
           socket.current.emit("addComment", {
             documentId: id,
             lineNumber,
@@ -53,7 +54,12 @@ function Update({ socket }) {
 
   // Sockets
   useEffect(() => {
-    if (!id || !socket.current) { console.log("No id or socket"); console.log(id); console.log(socket); return; }
+    if (!id || !socket.current) {
+      console.log("No id or socket");
+      console.log(id);
+      console.log(socket);
+      return;
+    }
     // Eslint vill att det sparas i en variabel
     // som används i clean up.
     const soc = socket.current;
@@ -147,99 +153,114 @@ function Update({ socket }) {
         </div>
 
         <Editor
-            height="80vh"
-            defaultLanguage="plaintext"
-            theme="vs-light"
-            value={content}
-            onMount={handleEditorDidMount}
-            onChange={(value) => {
-              if (value !== content) {
-                setContent(value);
-                socket.current.emit("doc", { _id: id, title, content: value });
-              }
-            }}
-            options={{
-              wordWrap: "on",
-              minimap: { enabled: false },
-              padding: { top: 16, bottom: 16 },
-              fontSize: 16,
-              fontFamily: 'Arial, sans-serif',
-              cursorStyle: "line",
-              scrollBeyondLastLine: false,
-              renderLineHighlight: "none",
-              automaticLayout: true,
+          height="80vh"
+          defaultLanguage="plaintext"
+          theme="vs-light"
+          value={content}
+          onMount={handleEditorDidMount}
+          onChange={(value) => {
+            if (value !== content) {
+              setContent(value);
+              socket.current.emit("doc", { _id: id, title, content: value });
+            }
+          }}
+          options={{
+            wordWrap: "on",
+            minimap: { enabled: false },
+            padding: { top: 16, bottom: 16 },
+            fontSize: 16,
+            fontFamily: "Arial, sans-serif",
+            cursorStyle: "line",
+            scrollBeyondLastLine: false,
+            renderLineHighlight: "none",
+            automaticLayout: true,
 
-              suggestOnTriggerCharacters: false,
-              quickSuggestions: false,
-              parameterHints: { enabled: false },
-              acceptSuggestionOnEnter: "off",
-              tabCompletion: "off",
-              wordBasedSuggestions: false,
+            suggestOnTriggerCharacters: false,
+            quickSuggestions: false,
+            parameterHints: { enabled: false },
+            acceptSuggestionOnEnter: "off",
+            tabCompletion: "off",
+            wordBasedSuggestions: false,
 
-              overviewRulerLanes: 0,
-              scrollbar: {
-                vertical: 'visible',
-                horizontal: 'visible',
-                handleMouseWheel: true,
-                alwaysConsumeMouseWheel: false,
-                verticalHasArrows: false,
-                horizontalHasArrows: false,
-                arrowSize: 0,
-                verticalScrollbarSize: 12,
-                horizontalScrollbarSize: 12,
-              },
-            }}
-          />
+            overviewRulerLanes: 0,
+            scrollbar: {
+              vertical: "visible",
+              horizontal: "visible",
+              handleMouseWheel: true,
+              alwaysConsumeMouseWheel: false,
+              verticalHasArrows: false,
+              horizontalHasArrows: false,
+              arrowSize: 0,
+              verticalScrollbarSize: 12,
+              horizontalScrollbarSize: 12,
+            },
+          }}
+        />
       </div>
 
       <div className="update-comments-sidebar">
         <h3>Comments</h3>
-        {comments.length === 0 && <p className="no-comments">No comments yet</p>}
+        {comments.length === 0 && (
+          <p className="no-comments">No comments yet</p>
+        )}
         {[...comments]
-        .sort((a, b) => a.lineNumber - b.lineNumber)
-        .map((c, i) => {
-          const lineCount = editorRef.current
-            ? editorRef.current.getModel().getLineCount()
-            : 0;
-          const lineExists = c.lineNumber <= lineCount;
+          .sort((a, b) => a.lineNumber - b.lineNumber)
+          .map((c, i) => {
+            const lineCount = editorRef.current
+              ? editorRef.current.getModel().getLineCount()
+              : 0;
+            const lineExists = c.lineNumber <= lineCount;
 
-          return (
-            <div
-              key={i}
-              className={`update-comment-card ${!lineExists ? "update-comment-disabled" : ""}`}
-              onMouseEnter={() => {
-                if (!lineExists) return;
-                if (editorRef.current && monacoRef.current) {
-                  const highlight = editorRef.current.deltaDecorations([], [
-                    {
-                      range: new monacoRef.current.Range(c.lineNumber, 1, c.lineNumber, 1),
-                      options: { isWholeLine: true, className: "update-hover-highlight-line" },
-                    },
-                  ]);
-                  c._highlightId = highlight;
-                }
-              }}
-              onMouseLeave={() => {
-                if (!lineExists || !c._highlightId) return;
-                editorRef.current.deltaDecorations(c._highlightId, []);
-                delete c._highlightId;
-              }}
-              onClick={() => {
-                if (!lineExists) return;
-                editorRef.current.revealLineInCenter(c.lineNumber);
-              }}
-            >
-              <p className="update-comment-line">
-                Line {lineExists ? c.lineNumber : "deleted"}
-              </p>
-              <p className="update-comment-content">💬 {c.content}</p>
-              <p className="update-comment-author">{c.author}</p>
-              <p className="update-comment-timestamp">
-                {new Date(c.createdAt).toLocaleString()}
-              </p>
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={i}
+                className={`update-comment-card ${
+                  !lineExists ? "update-comment-disabled" : ""
+                }`}
+                onMouseEnter={() => {
+                  if (!lineExists) return;
+                  if (editorRef.current && monacoRef.current) {
+                    const highlight = editorRef.current.deltaDecorations(
+                      [],
+                      [
+                        {
+                          range: new monacoRef.current.Range(
+                            c.lineNumber,
+                            1,
+                            c.lineNumber,
+                            1
+                          ),
+                          options: {
+                            isWholeLine: true,
+                            className: "update-hover-highlight-line",
+                          },
+                        },
+                      ]
+                    );
+                    c._highlightId = highlight;
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (!lineExists || !c._highlightId) return;
+                  editorRef.current.deltaDecorations(c._highlightId, []);
+                  delete c._highlightId;
+                }}
+                onClick={() => {
+                  if (!lineExists) return;
+                  editorRef.current.revealLineInCenter(c.lineNumber);
+                }}
+              >
+                <p className="update-comment-line">
+                  Line {lineExists ? c.lineNumber : "deleted"}
+                </p>
+                <p className="update-comment-content">💬 {c.content}</p>
+                <p className="update-comment-author">{c.author}</p>
+                <p className="update-comment-timestamp">
+                  {new Date(c.createdAt).toLocaleString()}
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

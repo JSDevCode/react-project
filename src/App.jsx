@@ -15,8 +15,10 @@ import Invitation from "./pages/Invitation/Invitation.jsx";
 import InviteInternal from "./pages/InviteInternal/InviteInternal.jsx";
 import "./App.css";
 
-const port = import.meta.env.VITE_PORT;
-const SERVER_URL = "http://localhost:" + port;
+// const port = import.meta.env.VITE_PORT;
+// const SERVER_URL = "http://localhost:" + port;
+const SERVER_URL =
+  "https://jsramverk-hagt21-fdbhdnf5hrgrcbcc.northeurope-01.azurewebsites.net/";
 
 function App() {
   // Skapar en referens till socket-anslutningen

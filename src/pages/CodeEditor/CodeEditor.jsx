@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getOne } from "../../api/data";
@@ -31,7 +32,7 @@ function CodeEditor({ socket }) {
         const lineNumber = e.target.position.lineNumber;
         const text = prompt(`Comment for line ${lineNumber}:`);
         if (text) {
-          console.log(text)
+          console.log(text);
           socket.current.emit("addComment", {
             documentId: id,
             lineNumber,
@@ -55,7 +56,12 @@ function CodeEditor({ socket }) {
 
   // Sockets
   useEffect(() => {
-    if (!id || !socket.current) { console.log("No id or socket"); console.log(id); console.log(socket); return; }
+    if (!id || !socket.current) {
+      console.log("No id or socket");
+      console.log(id);
+      console.log(socket);
+      return;
+    }
     // Eslint vill att det sparas i en variabel
     // som används i clean up.
     const soc = socket.current;
@@ -141,7 +147,11 @@ function CodeEditor({ socket }) {
       <div className="editor-section">
         <h2>Code Editor for document {id}</h2>
         <div className="editor-actions">
-          <button className="run-btn-code" onClick={handleRun} disabled={running}>
+          <button
+            className="run-btn-code"
+            onClick={handleRun}
+            disabled={running}
+          >
             {running ? "Running..." : "Run code"}
           </button>
           <button className="update-btn-code" onClick={redirectToDocs}>
@@ -169,66 +179,80 @@ function CodeEditor({ socket }) {
         />
 
         <h3>Output:</h3>
-          {running ? (
-            <div className="output-loading">
-              <div className="spinner"></div>
-              <p>Running code...</p>
-            </div>
-          ) : (
-            <pre className="output-box">{output}</pre>
-          )}
+        {running ? (
+          <div className="output-loading">
+            <div className="spinner"></div>
+            <p>Running code...</p>
+          </div>
+        ) : (
+          <pre className="output-box">{output}</pre>
+        )}
       </div>
 
       <div className="comments-sidebar">
         <h3>Comments</h3>
-        {comments.length === 0 && <p className="no-comments">No comments yet</p>}
+        {comments.length === 0 && (
+          <p className="no-comments">No comments yet</p>
+        )}
         {[...comments]
-        .sort((a, b) => a.lineNumber - b.lineNumber)
-        .map((c, i) => {
-          const model = editorRef.current?.getModel();
-          const lineCount = model?.getLineCount?.() || null;
+          .sort((a, b) => a.lineNumber - b.lineNumber)
+          .map((c, i) => {
+            const model = editorRef.current?.getModel();
+            const lineCount = model?.getLineCount?.() || null;
 
-          // If editor not ready yet, assume line exists temporarily
-          const lineExists =
-            lineCount === null || c.lineNumber <= lineCount;
+            // If editor not ready yet, assume line exists temporarily
+            const lineExists = lineCount === null || c.lineNumber <= lineCount;
 
-          return (
-            <div
-              key={i}
-              className={`comment-card ${!lineExists ? "comment-disabled" : ""}`}
-              onMouseEnter={() => {
-                if (!lineExists) return;
-                if (editorRef.current && monacoRef.current) {
-                  const highlight = editorRef.current.deltaDecorations([], [
-                    {
-                      range: new monacoRef.current.Range(c.lineNumber, 1, c.lineNumber, 1),
-                      options: { isWholeLine: true, className: "hover-highlight-line" },
-                    },
-                  ]);
-                  c._highlightId = highlight;
-                }
-              }}
-              onMouseLeave={() => {
-                if (!lineExists || !c._highlightId) return;
-                editorRef.current.deltaDecorations(c._highlightId, []);
-                delete c._highlightId;
-              }}
-              onClick={() => {
-                if (!lineExists) return;
-                editorRef.current.revealLineInCenter(c.lineNumber);
-              }}
-            >
-              <p className="comment-line">
-                Line {lineExists ? c.lineNumber : "deleted"}
-              </p>
-              <p className="comment-content">💬 {c.content}</p>
-              <p className="comment-author">{c.author}</p>
-              <p className="comment-timestamp">
-                {new Date(c.createdAt).toLocaleString()}
-              </p>
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={i}
+                className={`comment-card ${
+                  !lineExists ? "comment-disabled" : ""
+                }`}
+                onMouseEnter={() => {
+                  if (!lineExists) return;
+                  if (editorRef.current && monacoRef.current) {
+                    const highlight = editorRef.current.deltaDecorations(
+                      [],
+                      [
+                        {
+                          range: new monacoRef.current.Range(
+                            c.lineNumber,
+                            1,
+                            c.lineNumber,
+                            1
+                          ),
+                          options: {
+                            isWholeLine: true,
+                            className: "hover-highlight-line",
+                          },
+                        },
+                      ]
+                    );
+                    c._highlightId = highlight;
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (!lineExists || !c._highlightId) return;
+                  editorRef.current.deltaDecorations(c._highlightId, []);
+                  delete c._highlightId;
+                }}
+                onClick={() => {
+                  if (!lineExists) return;
+                  editorRef.current.revealLineInCenter(c.lineNumber);
+                }}
+              >
+                <p className="comment-line">
+                  Line {lineExists ? c.lineNumber : "deleted"}
+                </p>
+                <p className="comment-content">💬 {c.content}</p>
+                <p className="comment-author">{c.author}</p>
+                <p className="comment-timestamp">
+                  {new Date(c.createdAt).toLocaleString()}
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
